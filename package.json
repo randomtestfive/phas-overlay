@@ -1,0 +1,33 @@
+{
+  "name": "phas-overlay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "webpack": "webpack",
+    "build:dev": "tsc --watch --preserveWatchOutput",
+    "start:dev": "concurrently \"nodemon dist/src/index.js\" \"webpack -w\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.4.8",
+    "@types/react": "^18.2.18",
+    "@types/react-dom": "^18.2.7",
+    "concurrently": "^8.2.0",
+    "nodemon": "^3.0.1",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
