@@ -1,5 +1,5 @@
 import React from "react";
-import { EvidenceId, evidence, ghosts } from "./data";
+import { EvidenceId, evidence, ghosts } from "../shared/data";
 
 export type CheckState = "unchecked" | "yes" | "no" | "impossible"
 
@@ -20,15 +20,20 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
 }
 //alignContent: "center", alignItems: "center", height: "100%",
 
+export type CheckMap = {
+    evidence: EvidenceId
+    state: CheckState
+}
+
 type Props = {
-    evidence: [EvidenceId, CheckState][]
+    evidence: CheckMap[]
 }
 
 export default function BottomPage(props: Props) {
     return <div style={{padding: "1vw", height: "100%", boxSizing: "border-box"}}>
         <div style={{display: "grid", gridAutoFlow: "column", gridTemplateRows: "repeat(3, 1fr)", width: "50%", height: "100%"}}>
             { props.evidence.map((e) => {
-                return <Checkbox key={e[0]} state={e[1]} text={evidence.getEffectiveShortNameForId(e[0])}/>
+                return <Checkbox key={e.evidence} state={e.state} text={evidence.getEffectiveShortNameForId(e.evidence)}/>
             })}
         </div>
     </div>

@@ -60,6 +60,12 @@ function ghostsWithEvidence(evidence: EvidenceId[]): GhostDatum[] {
     return ghostData.filter((g) => evidence.filter((e) => g.evidence.includes(e)).length > 0)
 }
 
+function impossibleWithEvidence(evidence: EvidenceId[]): EvidenceId[] {
+    const ghosts = ghostsWithEvidence(evidence)
+    const possibleEvidence = ghosts.flatMap((g) => g.evidence)
+    return evidenceIds.filter((e) => !possibleEvidence.includes(e))
+}
+
 const evidence = {
     evidenceIds,
     evidenceData,

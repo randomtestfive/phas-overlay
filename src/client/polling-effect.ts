@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react";
 
 export default function usePollingEffect(
-    asyncCallback,
+    asyncCallback: () => void,
     dependencies = [],
     { 
       interval = 10_000, // 10 seconds,
       onCleanUp = () => {}
     } = {},
   ) {
-    const timeoutIdRef = useRef(null)
+    const timeoutIdRef = useRef<NodeJS.Timeout | null>(null)
     useEffect(() => {
       let _stopped = false
       // Side note: preceding semicolon needed for IIFEs.
@@ -26,7 +26,7 @@ export default function usePollingEffect(
       // Clean up if dependencies change
       return () => {
         _stopped = true // prevent racing conditions
-        clearTimeout(timeoutIdRef.current)
+        clearTimeout(timeoutIdRef.current as NodeJS.Timeout)
         onCleanUp()
       }
     }, [...dependencies, interval])

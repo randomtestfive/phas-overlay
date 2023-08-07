@@ -8,7 +8,7 @@
     "tsc": "tsc",
     "webpack": "webpack",
     "build:dev": "tsc --watch --preserveWatchOutput",
-    "start:dev": "concurrently \"nodemon dist/src/index.js\" \"webpack -w\""
+    "start:dev": "concurrently \"nodemon dist/index.js\" \"webpack -w\""
   },
   "keywords": [],
   "author": "",
