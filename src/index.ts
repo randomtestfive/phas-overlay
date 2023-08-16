@@ -1,11 +1,9 @@
 import express, { Request, Response, NextFunction } from "express";
 import path from "path";
-import { GameState } from "./shared/state"
+import { GameState, defaultState } from "./shared/state"
 import { evidence } from "./shared/data";
 
-var state: GameState = {
-    evidence: evidence.evidenceIds.map((e) => ({ id: e, state: "unchecked" }))
-}
+var state: GameState = defaultState
 
 const app = express();
 
@@ -13,10 +11,17 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true }))
 
-
 app.get("/", (req: Request, res: Response, next: NextFunction): void => {
     try {
-        res.send("index.html");
+        res.sendFile(path.join(__dirname, "../public/mobile.html"));
+    } catch (error) {
+        next(error);
+    }
+});
+
+app.get("/client", (req: Request, res: Response, next: NextFunction): void => {
+    try {
+        res.sendFile(path.join(__dirname, "../public/client.html"));
     } catch (error) {
         next(error);
     }
